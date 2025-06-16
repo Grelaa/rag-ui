@@ -42,12 +42,9 @@ body {
 
 .input-area label {
   color: #ccc;
-  align-self: flex-start;
-  max-width: 500px;
-  width: 100%;
-  text-align: left;
-  padding-left: 4px;
+  text-align: center;
   font-size: 0.9rem;
+  width: 100%;
 }
 
 .input-area input,
