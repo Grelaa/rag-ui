@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ask PDFs</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="wrapper">
+    <div class="content">
+      <h2 class="title">Ask the PDFs</h2>
+      <p class="instructions">Type a question based on the educational documents</p>
+
+      <div class="input-area">
+        <input type="text" id="questionInput" placeholder="Type your question here..." />
+        <label for="countSelect">Number of follow-up questions:</label>
+        <select id="countSelect">
+          <option value="1">1</option>
+          <option value="2" selected>2</option>
+          <option value="3">3</option>
+          <option value="5">5</option>
+        </select>
+        <button onclick="submitQuestion()">Ask</button>
+      </div>
+
+      <pre id="responseBox" class="response-box"></pre>
+    </div>
+  </div>
+
+  <script>
+    async function submitQuestion() {
+      const question = document.getElementById("questionInput").value;
+      const count = document.getElementById("countSelect").value;
+      const responseBox = document.getElementById("responseBox");
+
+      if (!question) {
+        responseBox.textContent = "❗ Please enter a question.";
+        return;
+      }
+
+      responseBox.textContent = "⏳ Thinking...";
+
+      try {
+        const res = await fetch("https://rag-api-349209033332.us-central1.run.app/ask", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ body: question, followup_count: Number(count) })
+        });
+
+        const data = await res.json();
+        responseBox.textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        responseBox.textContent = "❌ Error: " + err.message;
+      }
+    }
+  </script>
+</body>
+</html>
