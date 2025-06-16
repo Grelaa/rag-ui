@@ -1,7 +1,7 @@
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #1e1e1e;
-  color: #e0e0e0;
+  color: #eee;
   margin: 0;
   padding: 0;
 }
@@ -28,7 +28,7 @@ body {
 
 .instructions {
   font-size: 1rem;
-  color: #aaa;
+  color: #ccc;
 }
 
 .input-area {
@@ -40,6 +40,16 @@ body {
   width: 100%;
 }
 
+.input-area label {
+  color: #ccc;
+  align-self: flex-start;
+  max-width: 500px;
+  width: 100%;
+  text-align: left;
+  padding-left: 4px;
+  font-size: 0.9rem;
+}
+
 .input-area input,
 .input-area select,
 .input-area button {
@@ -48,9 +58,14 @@ body {
   padding: 0.75rem;
   font-size: 1rem;
   border-radius: 6px;
-  border: 1px solid #333;
+  border: 1px solid #444;
   background-color: #2c2c2c;
   color: #fff;
+  box-sizing: border-box;
+}
+
+.input-area input::placeholder {
+  color: #aaa;
 }
 
 .input-area input:focus,
@@ -75,11 +90,11 @@ body {
 .response-box {
   margin-top: 2rem;
   background: #2c2c2c;
-  color: #e0e0e0;
+  color: #eee;
   padding: 1rem;
   border-radius: 6px;
   white-space: pre-wrap;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  width: 100%;
-  max-width: 500px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  max-width: 600px;
+  overflow-x: auto;
 }
