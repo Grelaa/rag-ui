@@ -57,7 +57,9 @@
         responseBox.innerHTML = `
           <div><strong>📝 Summary:</strong> <p>${data.summary}</p></div>
           <div><strong>📚 Follow-up Questions:</strong>
-            <ol>${data.follow_up_questions.map(q => `<li>${q}</li>`).join("")}</ol>
+              <ol>${data.follow_up_questions.map(q => {
+                return `<li>${q.replace(/^\d+\.\s*/, '')}</li>`;
+              }).join("")}</ol>
           </div>
         `;
       } catch (err) {
