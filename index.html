@@ -48,10 +48,14 @@
 
         const data = await res.json();
 
-        if (data.error) {
-          responseBox.innerHTML = `<strong>❌ Error:</strong> ${data.error}`;
-          return;
-        }
+          if (data.error) {
+            responseBox.innerHTML = `
+              <div style="color: #ff4d4f; font-weight: bold; padding: 1rem;">
+                ❌ ${data.error.replace(/\n/g, "<br>")}
+              </div>
+            `;
+            return;
+          }
 
         responseBox.innerHTML = `
           <div><strong>📝 Summary:</strong> <p>${data.summary}</p></div>
