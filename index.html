@@ -23,7 +23,7 @@
         <button onclick="submitQuestion()">Ask</button>
       </div>
 
-      <pre id="responseBox" class="response-box"></pre>
+      <div id="responseBox" class="response-box"></div>
     </div>
   </div>
 
@@ -34,11 +34,11 @@
       const responseBox = document.getElementById("responseBox");
 
       if (!question) {
-        responseBox.textContent = "❗ Please enter a question.";
+        responseBox.innerHTML = "<em>❗ Please enter a question.</em>";
         return;
       }
 
-      responseBox.textContent = "⏳ Thinking...";
+      responseBox.innerHTML = "<em>⏳ Thinking...</em>";
 
       try {
         const res = await fetch("https://rag-api-349209033332.us-central1.run.app/ask", {
@@ -48,9 +48,20 @@
         });
 
         const data = await res.json();
-        responseBox.textContent = JSON.stringify(data, null, 2);
+
+        if (data.error) {
+          responseBox.innerHTML = `<strong>❌ Error:</strong> ${data.error}`;
+          return;
+        }
+
+        responseBox.innerHTML = `
+          <div><strong>📝 Summary:</strong> <p>${data.summary}</p></div>
+          <div><strong>📚 Follow-up Questions:</strong>
+            <ol>${data.follow_up_questions.map(q => `<li>${q}</li>`).join("")}</ol>
+          </div>
+        `;
       } catch (err) {
-        responseBox.textContent = "❌ Error: " + err.message;
+        responseBox.innerHTML = `<strong>❌ Error:</strong> ${err.message}`;
       }
     }
   </script>
