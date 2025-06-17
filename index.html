@@ -6,36 +6,33 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- NAVBAR -->
-  <nav class="topbar">
-    <div class="nav-title">📘 Source PDFs:</div>
-    <ul class="nav-links">
+
+  <div class="sidebar">
+    <h3>📚 Source PDFs:</h3>
+    <ul>
       <li><a href="https://raw.githubusercontent.com/yanshengjia/ml-road/47cadb02faa756f85fd2f058e31221cc8223b97a/resources/Artificial%20Intelligence%20-%20A%20Modern%20Approach%20(3rd%20Edition).pdf" target="_blank">🤖 AI</a></li>
       <li><a href="https://prussia.online/Data/Book/th/the-second-world-war-2012/Beevor%20A.%20The%20Second%20World%20War%20(2012),%20OCR.pdf" target="_blank">🌍 WWII</a></li>
       <li><a href="https://archive.org/details/cu31924022441871" target="_blank">🎼 Music</a></li>
       <li><a href="https://assets.openstax.org/oscms-prodcms/media/documents/Biology2e-WEB_ICOFkGu.pdf" target="_blank">🧬 Biology</a></li>
     </ul>
-  </nav>
+  </div>
 
-  <!-- MAIN CONTENT -->
-  <div class="wrapper">
-    <div class="content">
-      <h2 class="title">Ask the PDFs</h2>
-      <p class="instructions">Type a question based on the educational documents</p>
+  <div class="main">
+    <h2 class="title">Ask the PDFs</h2>
+    <p class="instructions">Type a question based on the educational documents</p>
 
-      <div class="input-area">
-        <input type="text" id="questionInput" placeholder="Type your question here..." />
-        <label for="countSelect">Number of follow-up questions:</label>
-        <select id="countSelect">
-          <option value="1">1</option>
-          <option value="2" selected>2</option>
-          <option value="3">3</option>
-        </select>
-        <button onclick="submitQuestion()">Ask</button>
-      </div>
-
-      <div id="responseBox" class="response-box"></div>
+    <div class="input-area">
+      <input type="text" id="questionInput" placeholder="Type your question here..." />
+      <label for="countSelect">Number of follow-up questions:</label>
+      <select id="countSelect">
+        <option value="1">1</option>
+        <option value="2" selected>2</option>
+        <option value="3">3</option>
+      </select>
+      <button onclick="submitQuestion()">Ask</button>
     </div>
+
+    <div id="responseBox" class="response-box"></div>
   </div>
 
   <script>
@@ -72,9 +69,7 @@
         responseBox.innerHTML = `
           <div><strong>📝 Summary:</strong> <p>${data.summary}</p></div>
           <div><strong>📚 Follow-up Questions:</strong>
-              <ol>${data.follow_up_questions.map(q => {
-                return `<li>${q.replace(/^\d+\.\s*/, '')}</li>`;
-              }).join("")}</ol>
+            <ol>${data.follow_up_questions.map(q => `<li>${q.replace(/^\d+\.\s*/, '')}</li>`).join("")}</ol>
           </div>
         `;
       } catch (err) {
